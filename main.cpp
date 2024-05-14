@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <random>
 #include "TennisWinners.h"
 #include "BinarySearchTree.h"
 #include "AVLTree.h"
@@ -64,7 +65,14 @@ int main() {
     for(int i = 1; i <= 100; i++){
         randInt.push_back(i);
     }
-    random_shuffle(randInt.begin(), randInt.end());
+    /*
+    Original Line was random_shuffle(tWinners.begin(), tWinners.end()); however random_shuffle has since not only been depricated but altogether removed in c++17
+    link to solution https://stackoverflow.com/questions/45013977/random-shuffle-is-not-a-member-of-std-error
+    */
+
+    random_device rd;
+    mt19937 g(rd());
+    shuffle(randInt.begin(), randInt.end(), g);
     for(int i = 0; i < 100; i++){
         randomInts.add(randInt[i]);
     }
@@ -125,7 +133,14 @@ int main() {
     for(int i = 1; i <= 100; i++){
         unorderedAVLvec.push_back(i);
     }
-    random_shuffle(unorderedAVLvec.begin(), unorderedAVLvec.end());
+
+    /*
+    Original Line was random_shuffle(unorderedAVLvec.begin(), unorderedAVLvec.end()); however random_shuffle has since not only been depricated but altogether removed in c++17
+    link to solution https://stackoverflow.com/questions/45013977/random-shuffle-is-not-a-member-of-std-error
+    */
+
+    mt19937 h(rd()); // mt19937 is the type of random sorter i am using for these randoms
+    shuffle(unorderedAVLvec.begin(), unorderedAVLvec.end(), h);
 
 
     // open file for avl ordered int
@@ -275,7 +290,14 @@ int main() {
     // creat a copy of the tWinners vec and make it a random order to do this
     vector<TennisWinners> tWinRandOrder;
     tWinRandOrder = tWinners;
-    random_shuffle(tWinRandOrder.begin(), tWinRandOrder.end());
+    
+    /*
+    Original Line was random_shuffle(ttWinRandOrder.begin(), tWinRandOrder.end()); however random_shuffle has since not only been depricated but altogether removed in c++17
+    link to solution https://stackoverflow.com/questions/45013977/random-shuffle-is-not-a-member-of-std-error
+    */
+
+    mt19937 l(rd()); // mt19937 (mersenne twister engine) is the type of random sorter i am using for these randoms
+    shuffle(tWinRandOrder.begin(), tWinRandOrder.end(), l);
 
     // open file for twinners splay 2
     myFile.open("../SplaytWinnersUnorderedTrue.csv");
